@@ -9,11 +9,13 @@ if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
 # Number of classes (categories) to collect data for
-number_of_classes = 15
+number_of_classes = 1
+
+no_class_exists = 25
 
 
 # Number of images to collect for each class
-dataset_size = 200
+dataset_size = 500
 
 # Open the video capture device (webcam)
 cap = cv2.VideoCapture(0)
@@ -21,10 +23,10 @@ cap = cv2.VideoCapture(0)
 # Loop through each class
 for j in range(number_of_classes):
     # Create a directory for the current class
-    if not os.path.exists(os.path.join(DATA_DIR, str(j))):
-        os.makedirs(os.path.join(DATA_DIR, str(j)))
+    if not os.path.exists(os.path.join(DATA_DIR, str(j+no_class_exists))):
+        os.makedirs(os.path.join(DATA_DIR, str(j+no_class_exists)))
 
-    print('Collecting data for class {}'.format(j))
+    print('Collecting data for class {}'.format(j+no_class_exists))
 
     # Wait for the user to press 'Q' to start collecting data for the current class
     done = False
@@ -44,7 +46,7 @@ for j in range(number_of_classes):
         cv2.imshow('frame', frame)
         cv2.waitKey(25)
         # Save the current frame/image with a unique name in the appropriate class directory
-        cv2.imwrite(os.path.join(DATA_DIR, str(j), '{}.jpg'.format(counter)), frame)
+        cv2.imwrite(os.path.join(DATA_DIR, str(j+no_class_exists), '{}.jpg'.format(counter)), frame)
         counter += 1
 
 # Release the video capture device and close all OpenCV windows

@@ -43,4 +43,4 @@ print('{}% of samples were classified correctly!'.format(score * 100))
 
 # Save the trained model to a pickle file
 with open('model.p', 'wb') as f:
-    pickle.dump({'model': model}, f)
+    pickle.dump({'model': model}, f) 

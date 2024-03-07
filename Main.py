@@ -14,7 +14,7 @@ def read_aloud(predicted_character):
 def update_predicted_word(predicted_character):
     current_text = text_widget.get("1.0", tk.END).strip()  # Get current text
     text_widget.delete("1.0", tk.END)  # Clear existing text
-    updated_text = current_text + " " + predicted_character + " "  # Append predicted character
+    updated_text = current_text + predicted_character + " "  # Append predicted character
     text_widget.insert(tk.END, updated_text)  # Update text widget
 
 model_dict = pickle.load(open('./model.p', 'rb'))
@@ -29,22 +29,10 @@ mp_drawing_styles = mp.solutions.drawing_styles
 
 hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
-labels_dict = { 0 : "Hii",
-                1 : "Hello",
-                2 : "Welcome",
-                3 : "End",
-                4 : "Me",
-                5 : "I",
-                6 : "You",
-                7 : "You",
-                8 : "Call Me",
-                9 : "Like",
-                10 : "Dislike",
-                11 : "Okay/Nice",
-                12 : "Please",
-                13 : "Good Luck",
-                14 : "I Love You"
-               }
+labels_dict = {    }
+for i in range (25):
+    labels_dict[i] = chr(ord('B') + i)
+labels_dict[25] = 'A'
 
 
 root = tk.Tk()
@@ -110,7 +98,12 @@ while True:
                 update_predicted_word(predicted_character)
             new_character = predicted_character
             read_aloud(predicted_character)
-        
+        else :
+            if predicted_character != "Unknown":
+                time.sleep(2)
+                update_predicted_word(predicted_character)
+            new_character = predicted_character
+            read_aloud(predicted_character)
 
     cv2.imshow('frame', frame)
     cv2.waitKey(1)
