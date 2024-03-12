@@ -98,12 +98,7 @@ while True:
                 update_predicted_word(predicted_character)
             new_character = predicted_character
             read_aloud(predicted_character)
-        else :
-            if predicted_character != "Unknown":
-                time.sleep(2)
-                update_predicted_word(predicted_character)
-            new_character = predicted_character
-            read_aloud(predicted_character)
+        
 
     cv2.imshow('frame', frame)
     cv2.waitKey(1)
